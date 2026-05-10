@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>個人飲食紀錄系統 V3</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fffaf3;--ink:#2d2a26;--muted:#756f66;--line:#e8dfd2;--accent:#a86f3d;--accent2:#d7a86e;--green:#2f8f62;--yellow:#b68413;--red:#c
+64b3c;--shadow:0 12px 32px rgba(65,45,25,.10);--radius:18px}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe
+UI","Noto Sans TC",Roboto,Arial,sans-serif;background:linear-gradient(180deg,#fbf7ef 0%,var(--bg)
+100%);color:var(--ink)}header{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);background:rgba(246,244,239,.9);border-bottom:1px solid
+var(--line)}.wrap{max-width:1220px;margin:0 auto;padding:16px}.hero{display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:22p
+x;margin:0}.sub{font-size:13px;color:var(--muted);margin-top:4px}.pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px
+12px;font-size:13px;color:var(--muted)}nav{display:flex;gap:8px;overflow:auto;padding:10px 16px 14px;max-width:1220px;margin:0 auto}.tab{border:1px solid
+var(--line);background:#fff;border-radius:999px;padding:9px 13px;color:var(--muted);white-space:nowrap;cursor:pointer;font-weight:650}.tab.active{backgroun
+d:var(--accent);color:white;border-color:var(--accent)}main{max-width:1220px;margin:0
+auto;padding:16px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:rgba(255,250,243,.96);border:1px solid
+var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}.col-4{grid-column:span 4}.col-5{grid-column:span 5}.col-6{grid-column:span
+6}.col-7{grid-column:span 7}.col-8{grid-column:span 8}.col-12{grid-column:span 12}h2{font-size:18px;margin:0 0 12px}h3{font-size:15px;margin:14px 0
+10px;color:#5c4630}.hint{font-size:12px;color:var(--muted);line-height:1.55}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;gri
+d-template-columns:repeat(3,1fr);gap:10px}.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}label{display:block;font-size:12px;font-weight:70
+0;color:#5d554d;margin-bottom:6px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:10px 11px;background:#fff;color:
+var(--ink);font-size:15px}textarea{min-height:80px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{border:0;border-radius
+:13px;padding:10px 13px;font-weight:800;cursor:pointer;background:var(--accent);color:#fff}.btn.secondary{background:#fff;color:var(--accent);border:1px
+solid var(--line)}.btn.danger{background:#c64b3c}.btn.small{font-size:12px;padding:7px
+9px;border-radius:10px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{background:#fff;border:1px solid
+var(--line);border-radius:16px;padding:12px}.metric .num{font-size:20px;font-weight:900;margin-top:5px}.metric .cap{font-size:12px;color:var(--muted)}.stat
+us{font-weight:900;font-size:20px}.good{color:var(--green)}.warn{color:var(--yellow)}.bad{color:var(--red)}table{width:100%;border-collapse:separate;border
+-spacing:0 8px}th{font-size:12px;color:var(--muted);text-align:left;padding:0 8px}td{background:#fff;border-top:1px solid var(--line);border-bottom:1px
+solid var(--line);padding:9px 8px;vertical-align:top;font-size:13px}td:first-child{border-left:1px solid var(--line);border-radius:12px 0 0
+12px}td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px
+0}.foodpic{width:54px;height:54px;object-fit:cover;border-radius:12px;border:1px solid
+var(--line)}.empty{padding:26px;text-align:center;color:var(--muted);border:1px dashed
+var(--line);border-radius:16px;background:#fff}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#fff;border:1px solid
+var(--line);border-radius:8px;padding:1px 6px}.hidden{display:none!important}.filterbar{display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin-bottom:1
+0px}.filterbar>div{min-width:145px}.list{display:flex;flex-direction:column;gap:10px}.dayitem{background:#fff;border:1px solid var(--line);border-radius:16
+px;padding:12px}.daytop{display:flex;justify-content:space-between;gap:10px;align-items:center}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.c
+hip{font-size:12px;background:#f6eee3;border:1px solid var(--line);border-radius:999px;padding:4px 8px}.note{background:#fff7e9;border:1px solid #ead5b8;bo
+rder-radius:14px;padding:10px;color:#5a4125;font-size:13px;line-height:1.55}.pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-
+top:10px;flex-wrap:wrap}.toast{position:fixed;right:16px;bottom:16px;background:#2d2a26;color:white;padding:12px 14px;border-radius:14px;box-shadow:var(--s
+hadow);z-index:99;opacity:0;transform:translateY(8px);transition:.25s}.toast.show{opacity:1;transform:translateY(0)}@media(max-width:860px){main{padding:12
+px}.grid{display:block}.card{margin-bottom:12px}.row,.row3,.row4,.summary{grid-template-columns:1fr}.hero{align-items:flex-start}.pill{display:none}td,th{f
+ont-size:12px}.wide-table{overflow:auto}.wide-table table{min-width:1100px}.filterbar>div{min-width:100%;}.pager{justify-content:center}}
+</style>
+</head>
+<body>
+<header><div class="wrap hero"><div><h1>🍱 個人飲食紀錄系統 V3</h1><div class="sub">保留 V1 所有頁面與功能，新增完整清單搜尋、50 筆分頁、蔬菜與纖維估算機制。資料只存在本機 localStorage。</div></div><div
+class="pill" id="storageHint">本機保存中</div></div><nav id="tabs"><button class="tab active" data-tab="entry">新增食物</button><button class="tab"
+data-tab="foods">每項食物紀錄</button><button class="tab" data-tab="fullList">完整食物清單</button><button class="tab" data-tab="daily">每日飲食</button><button
+class="tab" data-tab="weekly">每週列表</button><button class="tab" data-tab="monthly">每月列表</button><button class="tab"
+data-tab="settings">設定/備份</button></nav></header>
+<main>
+<section id="entry" class="panel"><div class="grid"><div class="card col-7"><h2>新增每一項吃的食物</h2><form id="foodForm"><input type="hidden" id="editId"><div
+class="row3"><div><label>日期</label><input type="date" id="date" required></div><div><label>餐別</label><select id="meal"><option>早餐</option><option>早午餐</opti
+on><option>午餐</option><option>晚餐</option><option>點心</option><option>宵夜</option><option>飲料</option><option>其他</option></select></div><div><label>什麼食物</label
+><input id="foodName" placeholder="例：麻辣火鍋、雞胸便當" required></div></div><div style="margin-top:10px"><label>食物描述</label><textarea id="description"
+placeholder="例：肉片 5 片、青菜 2 份、蘿蔔 3 塊、白飯半碗"></textarea></div><div class="row" style="margin-top:10px"><div><label>什麼情況下吃的</label><input id="situation"
+placeholder="例：加班後、朋友聚餐、運動後"></div><div><label>上傳照片（補充描述）</label><input type="file" id="photo" accept="image/*"><input type="hidden"
+id="photoData"></div></div><h3>營養估算</h3><div class="row3"><div><label>熱量 kcal</label><input type="number" id="calories" min="0" step="1"
+placeholder="0"></div><div><label>碳水 g</label><input type="number" id="carbs" min="0" step="0.1" placeholder="0"></div><div><label>蛋白質 g</label><input
+type="number" id="protein" min="0" step="0.1" placeholder="0"></div><div><label>脂肪 g</label><input type="number" id="fat" min="0" step="0.1"
+placeholder="0"></div><div><label>纖維 g（可填總纖維）</label><input type="number" id="fiber" min="0" step="0.1" placeholder="0"></div><div><label>鈉
+mg</label><input type="number" id="sodium" min="0" step="1" placeholder="0"></div></div><h3>蔬菜與纖維估算</h3><div class="note">可二選一輸入蔬菜重量或拳頭數，系統會用 100g 蔬菜 = 1 拳
+= 2.5g 纖維自動換算。選「一盤外食燙青菜」會自動帶入 120g、1.2 拳、3g 纖維。</div><div class="row4" style="margin-top:10px"><div><label>快捷選項</label><select id="vegQuick"><option
+value="">不使用</option><option value="boiledGreens">一盤外食燙青菜</option></select></div><div><label>蔬菜重量 g</label><input type="number" id="vegWeight" min="0"
+step="1" placeholder="例：120"></div><div><label>蔬菜拳頭數</label><input type="number" id="vegFists" min="0" step="0.1"
+placeholder="例：1.2"></div><div><label>估算蔬菜纖維 g</label><input type="number" id="vegFiber" min="0" step="0.1" readonly></div></div><div class="hint"
+id="vegCalcHint" style="margin-top:8px">蔬菜份數：0 份</div><div class="actions"><button class="btn" type="submit">儲存食物紀錄</button><button class="btn secondary"
+type="button" id="resetForm">清空欄位</button></div></form></div><div class="card col-5"><h2>今日快速總覽</h2><div id="todaySummary" class="summary"></div><div
+class="note" style="margin-top:12px"><b>纖維設計：</b>系統保留 V1 的「總纖維 g」作為營養總量，同時新增「蔬菜估算纖維 g」。蔬菜判斷使用重量與蔬菜纖維雙指標：300g 基本、500g 理想；7.5g 基本、12.5g
+理想。</div></div></div></section>
+<section id="foods" class="panel hidden"><div class="card"><h2>每項食物紀錄表</h2><div class="filterbar"><div><label>開始日期</label><input type="date"
+id="foodStart"></div><div><label>結束日期</label><input type="date" id="foodEnd"></div><div><label>餐別</label><select id="foodMeal"><option value="">全部</option>
+<option>早餐</option><option>早午餐</option><option>午餐</option><option>晚餐</option><option>點心</option><option>宵夜</option><option>飲料</option><option>其他</option></
+select></div><div><label>搜尋食物/描述</label><input id="foodSearch" placeholder="關鍵字"></div><button class="btn secondary"
+onclick="renderFoods(1)">篩選</button></div><div class="wide-table" id="foodTable"></div><div id="foodPager" class="pager"></div></div></section>
+<section id="fullList" class="panel hidden"><div class="card"><h2>完整食物記錄表清單</h2><div class="note"
+style="margin-bottom:10px">這裡是完整搜尋清單，可搜尋吃過的食物，並可依特定日期、月份或一段時間篩選。每頁最多 50 筆。</div><div class="filterbar"><div><label>搜尋食物/描述/情境</label><input id="fullSearch"
+placeholder="例：火鍋、青菜、聚餐"></div><div><label>特定日期</label><input type="date" id="fullExactDate"></div><div><label>特定月份</label><input type="month"
+id="fullMonth"></div><div><label>開始日期</label><input type="date" id="fullStart"></div><div><label>結束日期</label><input type="date"
+id="fullEnd"></div><div><label>餐別</label><select id="fullMeal"><option value="">全部</option><option>早餐</option><option>早午餐</option><option>午餐</option><optio
+n>晚餐</option><option>點心</option><option>宵夜</option><option>飲料</option><option>其他</option></select></div><button class="btn secondary"
+onclick="renderFullList(1)">搜尋/篩選</button><button class="btn secondary" onclick="clearFullFilters()">清除條件</button></div><div class="wide-table"
+id="fullTable"></div><div id="fullPager" class="pager"></div></div></section>
+<section id="daily" class="panel hidden"><div class="grid"><div class="card col-4"><h2>每日補充資料</h2><div><label>選擇日期</label><input type="date"
+id="dailyDate"></div><div class="row" style="margin-top:10px"><div><label>當天是否有運動</label><select id="exercise"><option value="no">沒有</option><option
+value="yes">有</option></select></div><div><label>消耗多少大卡</label><input type="number" id="exerciseKcal" min="0" step="1" placeholder="0"></div></div><div
+class="row" style="margin-top:10px"><div><label>有沒有排便</label><select id="bowel"><option value="unknown">未記錄</option><option value="yes">有</option><option
+value="no">沒有</option></select></div><div><label>備註</label><input id="dailyNote" placeholder="例：很餓、外食偏鹹"></div></div><div class="actions"><button
+class="btn" id="saveDailyMeta">儲存每日補充</button></div><div class="note" style="margin-top:12px">每日營養由「每項食物紀錄」自動加總。這裡只補運動、排便與備註。</div></div><div class="card
+col-8"><h2>每日飲食紀錄</h2><div id="dailyDetail"></div></div></div></section>
+<section id="weekly" class="panel hidden"><div class="card"><h2>每週吃的食物列表</h2><div class="filterbar"><div><label>選擇週內任一天</label><input type="date"
+id="weekDate"></div><button class="btn secondary" onclick="renderWeekly(1)">更新週列表</button></div><div id="weeklyList" class="list"></div><div
+id="weeklyPager" class="pager"></div></div></section>
+<section id="monthly" class="panel hidden"><div class="card"><h2>每月吃的食物列表</h2><div class="filterbar"><div><label>選擇月份</label><input type="month"
+id="monthDate"></div><button class="btn secondary" onclick="renderMonthly(1)">更新月列表</button></div><div id="monthlyList" class="list"></div><div
+id="monthlyPager" class="pager"></div></div></section>
+<section id="settings" class="panel hidden"><div class="grid"><div class="card col-6"><h2>目標設定</h2><div class="row3"><div><label>每日纖維目標 g</label><input
+type="number" id="setFiber" min="1" step="1"></div><div><label>熱量綠燈上限 kcal</label><input type="number" id="setCalGreen" min="1"
+step="1"></div><div><label>熱量黃燈上限 kcal</label><input type="number" id="setCalYellow" min="1" step="1"></div><div><label>蛋白質黃燈下限 g</label><input
+type="number" id="setProteinYellow" min="1" step="1"></div><div><label>蛋白質綠燈下限 g</label><input type="number" id="setProteinGreen" min="1"
+step="1"></div><div><label>單項食物足夠纖維 g</label><input type="number" id="setFoodFiber" min="0" step="0.5"></div></div><div class="actions"><button class="btn"
+id="saveSettings">儲存設定</button><button class="btn secondary" id="restoreDefaults">恢復預設</button></div></div><div class="card col-6"><h2>備份 / 還原</h2><p
+class="hint">localStorage 只會保存在目前瀏覽器與裝置。換手機、清除瀏覽資料或不同瀏覽器不會自動同步，建議定期匯出 JSON 備份。</p><div class="actions"><button class="btn" id="exportJson">匯出
+JSON</button><label class="btn secondary" style="display:inline-block">匯入 JSON<input type="file" id="importJson" accept="application/json"
+style="display:none"></label><button class="btn danger" id="clearAll">清空全部資料</button></div><h3>目前資料摘要</h3><div id="dataStats"
+class="hint"></div></div></div></section>
+</main><div id="toast" class="toast"></div>
+<script>
+const LS_KEY='personal_diet_tracker_v3';const OLD_KEYS=['personal_diet_tracker_v2','personal_diet_tracker_v1'];const PAGE_SIZE=50;const
+DEFAULT_SETTINGS={fiberGoal:25,calGreen:1100,calYellow:1500,proteinYellow:50,proteinGreen:60,proteinIdeal:72,foodFiberEnough:5};let
+state={foods:[],dailyMeta:{},settings:{...DEFAULT_SETTINGS}};let currentPages={foods:1,full:1,weekly:1,monthly:1};
+const $=id=>document.getElementById(id);const num=v=>Number(v||0);const r1=v=>Math.round(num(v)*10)/10;const today=()=>new
+Date().toISOString().slice(0,10);const monthNow=()=>today().slice(0,7);const
+esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));function uid(){return
+Date.now().toString(36)+Math.random().toString(36).slice(2)}function toast(m){const
+t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function load(){let raw=localStorage.getItem(LS_KEY);if(!raw){for(const k of OLD_KEYS){raw=localStorage.getItem(k);if(raw)break}}if(raw){try{const d=JSON.p
+arse(raw);state={foods:(d.foods||[]).map(normalizeFood),dailyMeta:d.dailyMeta||{},settings:{...DEFAULT_SETTINGS,...(d.settings||{})}}}catch(e){console.warn
+(e)}}save(false)}function save(show=true){localStorage.setItem(LS_KEY,JSON.stringify(state));if(show)toast('已儲存');renderAll()}function
+normalizeFood(f){return{ id:f.id||uid(),date:f.date||today(),meal:f.meal||'其他',foodName:f.foodName||'',description:f.description||'',situation:f.situation|
+|'',calories:num(f.calories),carbs:num(f.carbs),protein:num(f.protein),fat:num(f.fat),fiber:num(f.fiber),sodium:num(f.sodium),photo:f.photo||'',vegWeight:n
+um(f.vegWeight),vegFists:num(f.vegFists),vegServings:num(f.vegServings),vegFiber:num(f.vegFiber),createdAt:f.createdAt||new Date().toISOString()}}
+function init(){load();['date','dailyDate','weekDate'].forEach(id=>$(id).value=today());$('monthDate').value=monthNow();bindTabs();bindForm();bindDaily();b
+indSettings();bindVeg();fillSettings();renderAll();}
+function bindTabs(){document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.r
+emove('active'));b.classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));$(b.dataset.tab).classList.remove('hid
+den');renderAll();}))}
+function bindVeg(){let active='';$('vegQuick').addEventListener('change',e=>{if(e.target.value==='boiledGreens'){$('vegWeight').value=120;calcVegFromWeight
+();}});$('vegWeight').addEventListener('input',()=>{active='weight';calcVegFromWeight()});$('vegFists').addEventListener('input',()=>{active='fists';calcVe
+gFromFists()});}
+function calcVegFromWeight(){const
+w=num($('vegWeight').value);if(w>0){$('vegFists').value=r1(w/100);$('vegFiber').value=r1(w/100*2.5);}else{$('vegFists').value='';$('vegFiber').value='';}
+$('vegCalcHint').textContent=`蔬菜份數：${r1(w/100)} 份`;}
+function calcVegFromFists(){const
+f=num($('vegFists').value);if(f>0){$('vegWeight').value=r1(f*100);$('vegFiber').value=r1(f*2.5);}else{$('vegWeight').value='';$('vegFiber').value='';}
+$('vegCalcHint').textContent=`蔬菜份數：${r1(f)} 份`;}
+function bindForm(){$('photo').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{
+$('photoData').value=reader.result};reader.readAsDataURL(file)});$('resetForm').addEventListener('click',resetForm);$('foodForm').addEventListener('submit'
+,e=>{e.preventDefault();const id=$('editId').value||uid();const existing=state.foods.find(f=>f.id===id);const food={id,date:$('date').value,meal:$('meal').
+value,foodName:$('foodName').value.trim(),description:$('description').value.trim(),situation:$('situation').value.trim(),calories:num($('calories').value)
+,carbs:num($('carbs').value),protein:num($('protein').value),fat:num($('fat').value),fiber:num($('fiber').value),sodium:num($('sodium').value),photo:$('pho
+toData').value||(existing&&existing.photo)||'',vegWeight:num($('vegWeight').value),vegFists:num($('vegFists').value),vegServings:num($('vegFists').value)||
+num($('vegWeight').value)/100,vegFiber:num($('vegFiber').value),createdAt:(existing&&existing.createdAt)||new
+Date().toISOString()};if(!food.date||!food.foodName){toast('請至少填日期與食物名稱');return}const
+idx=state.foods.findIndex(f=>f.id===id);if(idx>=0)state.foods[idx]=food;else state.foods.push(food);resetForm();save();})}
+function resetForm(){$('foodForm').reset();$('date').value=today();$('editId').value='';$('photoData').value='';$('vegCalcHint').textContent='蔬菜份數：0 份';}
+function editFood(id){const f=state.foods.find(x=>x.id===id);if(!f)return;document.querySelector('[data-tab="entry"]').click();for(const k of ['date','meal
+','foodName','description','situation','calories','carbs','protein','fat','fiber','sodium','vegWeight','vegFists','vegFiber']){if($(k))$(k).value=f[k]??''}
+$('editId').value=f.id;$('photoData').value=f.photo||'';$('vegCalcHint').textContent=`蔬菜份數：${r1(f.vegServings||f.vegWeight/100)} 份`;toast('已載入編輯');}
+function deleteFood(id){if(confirm('確定刪除此筆食物紀錄？')){state.foods=state.foods.filter(f=>f.id!==id);save();}}
+function totals(date){const items=state.foods.filter(f=>f.date===date);const t={items,calories:0,carbs:0,protein:0,fat:0,fiber:0,sodium:0,vegWeight:0,vegFi
+sts:0,vegFiber:0};items.forEach(f=>{['calories','carbs','protein','fat','fiber','sodium','vegWeight','vegFists','vegFiber'].forEach(k=>t[k]+=num(f[k]))});r
+eturn t}
+function calStatus(v){return v<=state.settings.calGreen?'💚':v<=state.settings.calYellow?'💛':'❤'}function proteinStatus(v){return
+(v<=state.settings.proteinIdeal&&v>state.settings.proteinGreen)?'🟢':(v>state.settings.proteinYellow&&v<=state.settings.proteinGreen)?'🟡':'🔴'}function
+vegWeightStatus(v){return v<300?'不足':v<500?'基本':'理想'}function vegFiberStatus(v){return v<7.5?'不足':v<12.5?'基本':'理想'}function clsStatus(s){return
+s==='理想'?'good':s==='基本'?'warn':'bad'}
+function summaryCards(t){return `<div class="metric"><div class="cap">熱量</div><div class="num">${r1(t.calories)}</div><div class="cap">kcal
+${calStatus(t.calories)}</div></div><div class="metric"><div class="cap">蛋白質</div><div class="num">${r1(t.protein)}g</div><div
+class="cap">${proteinStatus(t.protein)}</div></div><div class="metric"><div class="cap">總纖維</div><div class="num">${r1(t.fiber)}g</div><div class="cap">目標
+${state.settings.fiberGoal}g</div></div><div class="metric"><div class="cap">鈉</div><div class="num">${r1(t.sodium)}</div><div
+class="cap">mg</div></div><div class="metric"><div class="cap">今日蔬菜</div><div class="num">${r1(t.vegWeight)}g</div><div
+class="cap">${vegWeightStatus(t.vegWeight)}</div></div><div class="metric"><div class="cap">今日蔬菜</div><div class="num">${r1(t.vegFists)}拳</div><div
+class="cap">100g = 1拳</div></div><div class="metric"><div class="cap">蔬菜提供纖維</div><div class="num">${r1(t.vegFiber)}g</div><div
+class="cap">${vegFiberStatus(t.vegFiber)}</div></div><div class="metric"><div class="cap">餐別數</div><div class="num">${new
+Set(t.items.map(i=>i.meal)).size}</div><div class="cap">共 ${t.items.length} 筆</div></div>`}
+function renderToday(){const t=totals(today());$('todaySummary').innerHTML=summaryCards(t)}
+function tableRows(items){return `<table><thead><tr><th>日期</th><th>餐別</th><th>食物</th><th>描述/情況</th><th>熱量</th><th>碳/蛋/脂</th><th>總纖維/鈉</th><th>蔬菜</th><th>照片
+</th><th>操作</th></tr></thead><tbody>${items.map(f=>`<tr><td>${esc(f.date)}</td><td>${esc(f.meal)}</td><td><b>${esc(f.foodName)}</b><br><span
+class="hint">${num(f.fiber)>=state.settings.foodFiberEnough?'纖維足夠':'纖維偏少'}</span></td><td>${esc(f.description)}<br><span
+class="hint">${esc(f.situation)}</span></td><td>${r1(f.calories)}</td><td>${r1(f.carbs)} / ${r1(f.protein)} / ${r1(f.fat)}g</td><td>${r1(f.fiber)}g /
+${r1(f.sodium)}mg</td><td>${r1(f.vegWeight)}g<br>${r1(f.vegFists)}拳<br>${r1(f.vegFiber)}g纖維</td><td>${f.photo?`<img class="foodpic"
+src="${f.photo}">`:''}</td><td><button class="btn small secondary" onclick="editFood('${f.id}')">編輯</button> <button class="btn small danger"
+onclick="deleteFood('${f.id}')">刪除</button></td></tr>`).join('')}</tbody></table>`}
+function paginate(items,page){const max=Math.max(1,Math.ceil(items.length/PAGE_SIZE));page=Math.min(Math.max(1,page||1),max);return{page,max,total:items.le
+ngth,items:items.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE)}}
+function pagerHtml(kind,p){return `<button class="btn small secondary" ${p.page<=1?'disabled':''} onclick="goPage('${kind}',${p.page-1})">上一頁</button><span
+class="hint">第 ${p.page} / ${p.max} 頁，共 ${p.total} 筆；每頁最多 ${PAGE_SIZE} 筆</span><button class="btn small secondary" ${p.page>=p.max?'disabled':''}
+onclick="goPage('${kind}',${p.page+1})">下一頁</button>`}
+function
+goPage(kind,p){if(kind==='foods')renderFoods(p);if(kind==='full')renderFullList(p);if(kind==='weekly')renderWeekly(p);if(kind==='monthly')renderMonthly(p)}
+function filteredBasic(prefix){let arr=[...state.foods].sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt.localeCompare(a.createdAt));const
+q=$(prefix+'Search')?.value?.trim().toLowerCase()||'';const start=$(prefix+'Start')?.value||'';const end=$(prefix+'End')?.value||'';const
+meal=$(prefix+'Meal')?.value||'';if(q)arr=arr.filter(f=>(f.foodName+' '+f.description+' '+f.situation).toLowerCase().includes(q));if(start)arr=arr.filter(f
+=>f.date>=start);if(end)arr=arr.filter(f=>f.date<=end);if(meal)arr=arr.filter(f=>f.meal===meal);return arr}
+function renderFoods(page=1){currentPages.foods=page;const arr=filteredBasic('food');const
+p=paginate(arr,page);$('foodTable').innerHTML=p.total?tableRows(p.items):'<div
+class="empty">沒有符合條件的食物紀錄</div>';$('foodPager').innerHTML=pagerHtml('foods',p)}
+function renderFullList(page=1){currentPages.full=page;let
+arr=[...state.foods].sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt.localeCompare(a.createdAt));const q=$('fullSearch').value.trim().toLowerCase(),
+exact=$('fullExactDate').value, mon=$('fullMonth').value, st=$('fullStart').value, en=$('fullEnd').value,
+meal=$('fullMeal').value;if(q)arr=arr.filter(f=>(f.foodName+' '+f.description+' '+f.situation).toLowerCase().includes(q));if(exact)arr=arr.filter(f=>f.date
+===exact);if(mon)arr=arr.filter(f=>f.date.startsWith(mon));if(st)arr=arr.filter(f=>f.date>=st);if(en)arr=arr.filter(f=>f.date<=en);if(meal)arr=arr.filter(f
+=>f.meal===meal);const p=paginate(arr,page);$('fullTable').innerHTML=p.total?tableRows(p.items):'<div
+class="empty">沒有符合搜尋條件的食物紀錄</div>';$('fullPager').innerHTML=pagerHtml('full',p)}
+function clearFullFilters(){['fullSearch','fullExactDate','fullMonth','fullStart','fullEnd','fullMeal'].forEach(id=>$(id).value='');renderFullList(1)}
+function bindDaily(){$('dailyDate').addEventListener('change',()=>{loadDailyMeta();renderDaily()});$('saveDailyMeta').addEventListener('click',()=>{const d
+=$('dailyDate').value;state.dailyMeta[d]={exercise:$('exercise').value,exerciseKcal:num($('exerciseKcal').value),bowel:$('bowel').value,note:$('dailyNote')
+.value};save();})}
+function loadDailyMeta(){const m=state.dailyMeta[$('dailyDate').value]||{};$('exercise').value=m.exercise||'no';$('exerciseKcal').value=m.exerciseKcal||'';
+$('bowel').value=m.bowel||'unknown';$('dailyNote').value=m.note||''}
+function renderDaily(){loadDailyMeta();const d=$('dailyDate').value,t=totals(d),m=state.dailyMeta[d]||{};const meals=[...new
+Set(t.items.map(i=>i.meal))].join('、')||'尚無';const foods=t.items.map(i=>i.foodName).join('、')||'尚無';const
+vegS=vegWeightStatus(t.vegWeight),vegFS=vegFiberStatus(t.vegFiber);const assess=`熱量 ${calStatus(t.calories)}；蛋白質 ${proteinStatus(t.protein)}；蔬菜攝取狀態：${vegS}
+；蔬菜纖維：${vegFS}；${m.bowel==='no'?'今日未排便，可留意水分與蔬菜。':m.bowel==='yes'?'今日有排便。':'排便未記錄。'}`;$('dailyDetail').innerHTML=`<div
+class="summary">${summaryCards(t)}</div><div class="note" style="margin-top:12px">今日蔬菜：約 ${r1(t.vegWeight)} g<br>今日蔬菜：約 ${r1(t.vegFists)} 拳<br>蔬菜提供纖維：約
+${r1(t.vegFiber)} g<br>蔬菜攝取狀態：<b class="${clsStatus(vegS)}">${vegS}</b>；蔬菜纖維狀態：<b class="${clsStatus(vegFS)}">${vegFS}</b></div><h3>當天完整欄位</h3><div
+class="chips"><span class="chip">餐別：${esc(meals)}</span><span class="chip">總共吃了：${esc(foods)}</span><span class="chip">運動：${m.exercise==='yes'?'有，消耗
+'+num(m.exerciseKcal)+' kcal':'沒有'}</span><span class="chip">排便：${m.bowel==='yes'?'有':m.bowel==='no'?'沒有':'未記錄'}</span></div><h3>自動當天營養總結評估</h3><div
+class="note">${assess}${m.note?'<br>備註：'+esc(m.note):''}</div><h3>當天食物明細</h3><div class="wide-table">${t.items.length?tableRows(t.items):'<div
+class="empty">這一天尚未新增食物紀錄</div>'}</div>`}
+function startOfWeek(dateStr){const d=new Date(dateStr+'T00:00:00');const day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return d}function fmt(d){return
+d.toISOString().slice(0,10)}function dayCard(d){const t=totals(d);const m=state.dailyMeta[d]||{};return `<div class="dayitem"><div
+class="daytop"><b>${d}</b><span class="hint">${t.items.length} 筆</span></div><div class="chips"><span class="chip">熱量 ${r1(t.calories)}
+${calStatus(t.calories)}</span><span class="chip">蛋白質 ${r1(t.protein)}g ${proteinStatus(t.protein)}</span><span class="chip">蔬菜 ${r1(t.vegWeight)}g /
+${r1(t.vegFists)}拳</span><span class="chip">蔬菜纖維 ${r1(t.vegFiber)}g</span><span class="chip">排便
+${m.bowel==='yes'?'有':m.bowel==='no'?'沒有':'未記錄'}</span></div><div class="hint"
+style="margin-top:8px">食物：${esc(t.items.map(i=>i.foodName).join('、')||'尚無')}</div></div>`}
+function renderWeekly(page=1){const base=$('weekDate').value||today();const s=startOfWeek(base);let days=[];for(let i=0;i<7;i++){let d=new
+Date(s);d.setDate(s.getDate()+i);days.push(fmt(d))}const
+p=paginate(days,page);$('weeklyList').innerHTML=p.items.map(dayCard).join('');$('weeklyPager').innerHTML=pagerHtml('weekly',p)}
+function renderMonthly(page=1){const mon=$('monthDate').value||monthNow();const [y,m]=mon.split('-').map(Number);const last=new Date(y,m,0).getDate();let
+days=[];for(let d=1;d<=last;d++)days.push(`${mon}-${String(d).padStart(2,'0')}`);const
+p=paginate(days,page);$('monthlyList').innerHTML=p.items.map(dayCard).join('');$('monthlyPager').innerHTML=pagerHtml('monthly',p)}
+function fillSettings(){const s=state.settings;$('setFiber').value=s.fiberGoal;$('setCalGreen').value=s.calGreen;$('setCalYellow').value=s.calYellow;$('set
+ProteinYellow').value=s.proteinYellow;$('setProteinGreen').value=s.proteinGreen;$('setFoodFiber').value=s.foodFiberEnough}
+function bindSettings(){$('saveSettings').addEventListener('click',()=>{state.settings={...state.settings,fiberGoal:num($('setFiber').value),calGreen:num($
+('setCalGreen').value),calYellow:num($('setCalYellow').value),proteinYellow:num($('setProteinYellow').value),proteinGreen:num($('setProteinGreen').value),f
+oodFiberEnough:num($('setFoodFiber').value)};save()});$('restoreDefaults').addEventListener('click',()=>{state.settings={...DEFAULT_SETTINGS};fillSettings(
+);save()});$('exportJson').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.cre
+ateElement('a');a.href=URL.createObjectURL(blob);a.download='diet-tracker-backup-'+today()+'.json';a.click();URL.revokeObjectURL(a.href)});$('importJson').
+addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const d=JSON.parse(reader.r
+esult);state={foods:(d.foods||[]).map(normalizeFood),dailyMeta:d.dailyMeta||{},settings:{...DEFAULT_SETTINGS,...(d.settings||{})}};fillSettings();save();to
+ast('匯入成功')}catch(err){alert('JSON 格式不正確')}};reader.readAsText(file)});$('clearAll').addEventListener('click',()=>{if(confirm('確定清空全部資料？此動作無法復原，建議先匯出備份。'))
+{state={foods:[],dailyMeta:{},settings:{...DEFAULT_SETTINGS}};fillSettings();save()}})}
+function renderStats(){const dates=[...new Set(state.foods.map(f=>f.date))];$('dataStats').innerHTML=`食物紀錄：${state.foods.length}
+筆<br>有紀錄的日期：${dates.length} 天<br>每日補充資料：${Object.keys(state.dailyMeta).length} 天<br>目前版本：V3，localStorage key = ${LS_KEY}`}
+function renderAll(){renderToday();renderFoods(currentPages.foods);renderFullList(currentPages.full);renderDaily();renderWeekly(currentPages.weekly);render
+Monthly(currentPages.monthly);renderStats();}
+window.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
